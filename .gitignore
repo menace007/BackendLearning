@@ -1,0 +1,7 @@
+# Ignore all node_modules everywhere
+node_modules/
+
+# Optional (good practice)
+.env
+.DS_Store
+npm-debug.log*
