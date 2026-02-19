@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View in Detail</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h2>Your post in detail</h2>
+    <div class="post">
+        <p>Post id: <%= post.id %></p>
+        <p>@<%= post.username %></p>
+        <img src="<%= post.photo %>" alt="image">
+        <h4><%= post.content %></h4>
+        <a href="http://localhost:8080/posts/<%= post.id %>/edit">Edit post</a>
+    </div>
+</body>
+</html>

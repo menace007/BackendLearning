@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit your post</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h2>Edit your post</h2>
+    <div class="post">
+        <p>Post id: <%= post.id %></p>
+        <p>@<%= post.username %></p>
+        <form method="post" action="/posts/<%= post.id %>?_method=PATCH">
+            <img src="<%= post.photo %>" alt="image here"><br>
+            <input type="text" name="photo" placeholder="Enter new URL"><br>
+            <textarea name="content" rows="3" cols="38"><%= post.content %></textarea><br>
+            <button>Update</button>
+        </form>
+    </div>
+</body>
+</html>
