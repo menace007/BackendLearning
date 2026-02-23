@@ -12,6 +12,7 @@
 </head>
 <body>
     <h2>Total user details</h2>
+    <a href="http://localhost:8080/user/new">Add new user</a>
     <table>
         <tr>
             <th>UserID</th>
@@ -24,6 +25,12 @@
                 <td><%= user.id %></td>
                 <td><%= user.username %></td>
                 <td><%= user.email %></td>
+                <form method="get" action="/user/<%= user.id %>/edit">
+                    <td><button>Edit username</button></td>
+                </form>
+                <form method="post" action="/user/<%= user.id %>?_method=DELETE">
+                    <td><button>Delete</button></td>
+                </form>
             </tr>
         <% } %>
         </tr>
