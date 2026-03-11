@@ -4,6 +4,7 @@ const port = 8080;
 const mongoose = require("mongoose");
 const Listing = require("./models/listing.js");
 const path = require("path");
+const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
 
 app.use(methodOverride("_method"));
@@ -11,7 +12,7 @@ app.use(express.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
-
+app.engine('ejs', ejsMate);
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/homelystay";
 main()
