@@ -52,31 +52,44 @@ router.post("/", validateListing, wrapAsync(async(req, res, next)=>{
     //     throw new ExpressError(400, "Country is missing")
     // }
     await newListing.save();
-    res.redirect("");
+    req.flash("success", "New listing created");
+    res.redirect("/listings");
 }));
 //Edit and update route
 router.get("/:id/edit", wrapAsync(async(req,res)=>{
     let {id} = req.params;
     const listing = await Listing.findById(id);
+    console.log(listing);
+    if(!listing){
+        req.flash("error", "Listing does not exist!");
+        res.redirect("/listings");
+    }
     res.render("listings/edit.ejs", {listing});
 }));
 //Capture data from edit.ejs and update
 router.put("/:id", validateListing, wrapAsync(async(req, res)=>{
     let {id} = req.params;
     await Listing.findByIdAndUpdate(id, {...req.body.listing});
-    res.redirect("");
+    req.flash("success", "Listing Updated!")
+    res.redirect(`/listings/${id}`);
 }));
 //Show route => read
 router.get("/:id", wrapAsync(async(req, res)=>{
     let {id} = req.params;
     const listing = await Listing.findById(id).populate("reviews");
+    if(!listing){
+        req.flash("error", "Listing does not exist!");
+        res.redirect("/listings");
+    }
     res.render("listings/show.ejs", {listing});
 }))
 //Delete route 
 router.delete("/:id", wrapAsync(async(req, res)=>{
     let {id} = req.params;
-    await Listing.findByIdAndDelete(id);
-    res.redirect("");
+    let deletedListing = await Listing.findByIdAndDelete(id);
+    console.log(deletedListing);
+    req.flash("success", "Listing Deleted!");
+    res.redirect("/listings");
 }));
 
 module.exports = router;
