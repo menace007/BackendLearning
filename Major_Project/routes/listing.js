@@ -52,7 +52,7 @@ router.post("/", validateListing, wrapAsync(async(req, res, next)=>{
     //     throw new ExpressError(400, "Country is missing")
     // }
     await newListing.save();
-    req.flash("success", "New listing created");
+    req.flash("success", "New Listing Created!");
     res.redirect("/listings");
 }));
 //Edit and update route
@@ -62,7 +62,7 @@ router.get("/:id/edit", wrapAsync(async(req,res)=>{
     console.log(listing);
     if(!listing){
         req.flash("error", "Listing does not exist!");
-        res.redirect("/listings");
+        return res.redirect("/listings");
     }
     res.render("listings/edit.ejs", {listing});
 }));
@@ -79,7 +79,7 @@ router.get("/:id", wrapAsync(async(req, res)=>{
     const listing = await Listing.findById(id).populate("reviews");
     if(!listing){
         req.flash("error", "Listing does not exist!");
-        res.redirect("/listings");
+        return res.redirect("/listings");
     }
     res.render("listings/show.ejs", {listing});
 }))
